@@ -1,0 +1,290 @@
+body{
+    background-color: rgb(255, 255, 255);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:rgb(0, 0, 0);
+    margin:0;
+    padding:0;
+}
+header{
+    background-color: rgb(165, 240, 143);
+    background-image: url("https://www.emerald-design.co.uk/media/iomfdscj/landing.jpg?anchor=center&mode=crop&width=1920&height=1080&rnd=132508572489970000");
+    background-size:100%;
+    background-position: center;
+    padding:20px 20px;
+    height: 500px;
+}
+section.features{
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    
+    display:flex;
+    flex-direction: row;
+    height:300px;
+}
+.features figure{
+    margin:auto;
+    margin-left: 75px;
+    width:300px;
+}
+.features figure img{
+    border: 1px solid white;
+    box-shadow: gray 0 0 10px;
+    width:300px;
+    height:250px;
+    border-radius: 50%;
+}
+.features figure figcaption{
+    text-align: center;
+    text-transform: uppercase;
+}
+ul{
+    padding:0;
+    margin:0;
+    list-style-type:None;
+    text-align:right;
+}
+
+li{
+    display:inline-block;
+    padding-right:20px;
+    font-family:'Courier New', Courier, monospace;
+}
+
+header .logo a{
+    background-image: url("../images/logo.png");
+    background-size:100%;
+    text-indent: 10000px;
+    display: inline-block;
+    width:40px;
+    height:60px;
+    background-repeat: no-repeat;
+    position:relative;
+    top:-15px;
+}
+
+a{
+    color:rgb(0, 0, 0);
+    text-decoration: None;
+}
+
+a:hover{
+    color:aqua;
+}
+
+
+footer{
+    background-color: black;
+    color:gray;
+    text-align: center;
+    size: 12px;
+    padding:10px 20px;
+}
+
+@media screen and (max-width:1500px) {
+    .features{
+        background-color: pink;
+    }
+}
+
+@media screen and (max-width: 1300px ) {
+    .features{
+        background-color: red;
+    }
+}
+
+#megaIntro2{
+    font-family:'Montserrat', sans-serif;
+    font-weight:700;
+    color:black;
+    text-align:center;
+    line-height:1.25em
+}
+@media screen and (max-width: 39.9375em){
+    #megaIntro2{
+        font-size:30px
+    }
+}
+
+@media screen and (min-width: 40em) and (max-width: 63.9375em){
+    #megaIntro2{
+        font-size:30px
+    }
+}
+
+@media screen and (min-width: 64em){
+    #megaIntro2{
+        font-size:48px
+    }
+}
+
+@media screen and (min-width: 90em){
+    #megaIntro2{
+        font-size:48px
+    }
+}
+
+.custom-btn {
+    width: 75px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 1 */
+  .btn-1 {
+    background: rgb(6, 14, 131);
+    background: linear-gradient(
+      0deg,
+      rgba(6, 14, 131, 1) 0%,
+      rgba(12, 25, 180, 1) 100%
+    );
+    border: none;
+  }
+  
+  .btn-1:hover {
+    background: rgb(0, 3, 255);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 3, 255, 1) 0%,
+      rgba(2, 126, 251, 1) 100%
+    );
+  }
+
+.font3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.push-3 {
+    height: 24px;
+}
+
+.center {
+    text-align: center;
+}
+
+#getStartedSpinner {
+    margin: 0 auto;
+}
+
+.custom-btn-2 {
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  }
+
+.btn-6 {
+    background: rgb(247, 150, 192);
+    background: radial-gradient(
+      circle,
+      rgba(247, 150, 192, 1) 0%,
+      rgba(118, 174, 241, 1) 100%
+    );
+    line-height: 42px;
+    padding: 0;
+    border: none;
+  }
+  .btn-6 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .btn-6:before,
+  .btn-6:after {
+    position: absolute;
+    content: "";
+    height: 0%;
+    width: 1px;
+    box-shadow: -1px -1px 20px 0px rgba(255, 255, 255, 1),
+      -4px -4px 5px 0px rgba(255, 255, 255, 1),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.4), 4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+  }
+  .btn-6:before {
+    right: 0;
+    top: 0;
+    transition: all 500ms ease;
+  }
+  .btn-6:after {
+    left: 0;
+    bottom: 0;
+    transition: all 500ms ease;
+  }
+  .btn-6:hover {
+    background: transparent;
+    color: #76aef1;
+    box-shadow: none;
+  }
+  .btn-6:hover:before {
+    transition: all 500ms ease;
+    height: 100%;
+  }
+  .btn-6:hover:after {
+    transition: all 500ms ease;
+    height: 100%;
+  }
+  .btn-6 span:before,
+  .btn-6 span:after {
+    position: absolute;
+    content: "";
+    box-shadow: -1px -1px 20px 0px rgba(255, 255, 255, 1),
+      -4px -4px 5px 0px rgba(255, 255, 255, 1),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.4), 4px 4px 5px 0px rgba(0, 0, 0, 0.3);
+  }
+  .btn-6 span:before {
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 0.5px;
+    transition: all 500ms ease;
+  }
+  .btn-6 span:after {
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: 0.5px;
+    transition: all 500ms ease;
+  }
+  .btn-6 span:hover:before {
+    width: 100%;
+  }
+  .btn-6 span:hover:after {
+    width: 100%;
+}
+
+.click{
+    text-decoration:underline;
+}
+
+  
+  
+  
+  
+  
+  
+ 

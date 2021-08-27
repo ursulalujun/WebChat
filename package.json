@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "eccrypto-js": "^5.4.0",
+    "eth-ecies": "^1.0.5",
+    "ethereumjs-util": "7.1.0",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0",
+    "web3": "^1.5.0"
+  }
+}
