@@ -1,9 +1,29 @@
 /* 
   启动聊天的服务端程序
 */
+
 var app = require('express')()
 var server = require('http').Server(app)
 var io = require('socket.io')(server)
+
+var eccryptoJS = require('eccrypto-js');
+
+const keyPairA = eccryptoJS.generateKeyPair();
+const keyPairB = eccryptoJS.generateKeyPair();
+console.info(keyPairB)
+
+const sharedKey1 = eccryptoJS.derive(
+    keyPairA.privateKey,
+    keyPairB.publicKey
+);
+
+const sharedKey2 = eccryptoJS.derive(
+    keyPairB.privateKey,
+    keyPairA.publicKey
+);
+console.log(sharedKey1 === sharedKey2)
+
+
 // 记录所有已经登录过的用户
 const users = []
 

@@ -4,8 +4,10 @@
 /* 
   1. 连接socketio服务
 */
-var socket = io('http://localhost:3000')
-var username, avatar, privateKey, publicKey, BpublicKey
+
+var socket = io('http://localhost:3000');
+// publicKeyB, AESKeyB 表示对方的公钥和AES密钥
+var username, avatar, privateKey, publicKey, publicKeyB, AESKey_str, AESKey, AESKeyB, encryptedAESKey;
 
 /* 
   2. 登录功能
@@ -17,24 +19,31 @@ $('#login_avatar li').on('click', function() {
     .removeClass('now')
 })
 // 点击按钮，登录
+$('#login_avatar li').on('click', function() {
+  $(this)
+      .addClass('now')
+      .siblings()
+      .removeClass('now')
+})
+// 点击按钮，登录
 $('#loginBtn').on('click', function() {
   // 获取用户名
   var username = $('#username')
-    .val()
-    .trim()
+      .val()
+      .trim()
   if (!username) {
     alert('请输入用户名')
     return
   }
 
-  //获取代表该账户的一对密钥
-  //let keyPair = eccryptoJS.generateKeyPair();
-  //privateKey = keyPair.privateKey;
-  const privateKey_str = '55bb4cb6407303de8e4c5a635021d3db12cb537305eeb6401612ce14b35d6690';
-  privateKey = new Buffer(privateKey_str, 'hex');
-  publicKey = util.privateToPublic(privateKey);
+  //导入私钥
+  const privateKey_str = '55bb4cb6407303de8e4c5a635021d3db12cb537305eeb6401612ce14b35d6690'
+  const AESKey_str = '123456'
+  AESKey = new Buffer(AESKey_str, 'hex')
+  privateKey = new Buffer(privateKey_str, 'hex')
+  publicKey = util.privateToPublic(privateKey)
   //将私钥保存在本地
-  localStorage.setItem(username, privateKey_str);
+  localStorage.setItem(username, privateKey_str)
 
   // 获取选择的头像
   var avatar = $('#login_avatar li.now img').attr('src')
@@ -45,6 +54,7 @@ $('#loginBtn').on('click', function() {
     avatar: avatar
   })
 })
+
 
 // 监听登录失败的请求
 socket.on('loginError', data => {
@@ -76,11 +86,14 @@ socket.on('loginSuccess', data => {
 socket.on('receivePublicKey', data => {
   if(username !== data.username)
   {
-    BpublicKey = data.publicKey
+    publicKeyB = data.publicKey
   }
-  console.info(BpublicKey)
-  const BpublicKey_str = data.publicKey.toString();
-  sessionStorage.setItem(data.username, BpublicKey_str);
+  console.info(publicKeyB)
+  const publicKeyB_str = data.publicKey.toString();
+  // 存储别人的公钥，由于只有本次对话中使用，sessionStorage即可
+  sessionStorage.setItem(data.username, publicKeyB_str);
+  // 用对方的公钥对AES密钥进行加密
+  encryptedAESKey = ecies.encrypt(publicKey, AESKey);//publicKeyB
 })
 
 // 监听添加用户的消息
@@ -136,14 +149,14 @@ $('.btn-send').on('click', () => {
   var content = $('#content').html()
   $('#content').html('')
   if (!content) return alert('请输入内容')
-  //将content从str转化为buffer
-  const plainText = new Buffer(content);
-  //对明文进行加密
-  const cipherText = ecies.encrypt(publicKey, plainText);
+  //对明文进行加密,AES加密函数使用string格式的密钥和message，返回buffer
+  //converting your string to a CryptoJS wordArray
+  const cipherText = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(content), '123456')
   console.info(cipherText)
   // 发送给服务器
   socket.emit('sendMessage', {
     msg: cipherText,
+    encryptedAESKey: encryptedAESKey,
     username: username,
     avatar: avatar
   })
@@ -170,7 +183,8 @@ socket.on('receiveMessage', data => {
     // 解密接收到的消息
     const dataBuffer = new Buffer(data.msg)
     console.info(localStorage.getItem(username))
-    const Decrypted = ecies.decrypt(privateKey,dataBuffer).toString('utf8')
+    const DecryptedAESKey = ecies.decrypt(privateKey,data.encryptedAESKey).toString('utf8')
+    const DecryptedText = CryptoJS.AES.decrypt(dataBuffer, DecryptedAESKey)
     // 把解密后的消息显示到聊天窗口中
        // 别人的消息
       $('.box-bd').append(`
@@ -180,7 +194,7 @@ socket.on('receiveMessage', data => {
             <div class="content">
               <div class="nickname">${data.username}</div>
               <div class="bubble">
-                <div class="bubble_cont">${Decrypted}</div>
+                <div class="bubble_cont">${DecryptedText}</div>
               </div>
             </div>
           </div>
